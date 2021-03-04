@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/vlogs",
+      "handler": "vlog.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/vlogs/count",
+      "handler": "vlog.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/vlogs/:id",
+      "handler": "vlog.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/vlogs",
+      "handler": "vlog.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/vlogs/:id",
+      "handler": "vlog.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/vlogs/:id",
+      "handler": "vlog.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

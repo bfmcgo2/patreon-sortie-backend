@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vlogs",
+  "info": {
+    "name": "vlog",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "vlogger": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "vlogs"
+    }
+  }
+}
