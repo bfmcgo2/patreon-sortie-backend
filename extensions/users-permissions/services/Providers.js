@@ -157,7 +157,7 @@ const getProfile = async (provider, query, callback) => {
           } else {
             callback(null, {
               username: body.name,
-              email: body.email,
+              email: `${body.username}@strapi.io`,
             });
           }
         });
