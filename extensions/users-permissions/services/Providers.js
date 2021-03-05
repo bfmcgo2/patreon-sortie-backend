@@ -113,7 +113,7 @@ const connect = (provider, query) => {
 
 const getProfile = async (provider, query, callback) => {
   const access_token = query.access_token || query.code || query.oauth_token;
-
+  console.log(access_token)
   const grant = await strapi
     .store({
       environment: '',
@@ -127,12 +127,28 @@ const getProfile = async (provider, query, callback) => {
     case 'patreon': {
       const patreon = purest({
         provider: 'patreon',
-        config: purestConfig,
+        config: {
+          patreon: {
+            'https://www.patreon.com': {
+              __domain: {
+                auth: {
+                  auth: { bearer: '[0]' }
+                }
+              },
+              '{endpoint}': {
+                __path: {
+                  alias: '__default'
+                }
+              }
+            }
+          }
+        },
+        key: grant.patreon.key
       });
 
       patreon
-        .query('oauth')
-        .get('token')
+        .query()
+        .get('oauth/authorize/?client_id='+grant.patreon.key+'&redirect_uri='+ encodeURIComponent(grant.patreon.callback)+'&scope='+encodeURIComponent(grant.patreon.scope.join(' ')+'&response_type=code&show_dialog=true'))
         .auth(access_token)
         .request((err, res, body) => {
           console.log(body)

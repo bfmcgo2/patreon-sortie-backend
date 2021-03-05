@@ -29,11 +29,9 @@ module.exports = async () => {
       icon: 'comments', // The icon to use on the UI
       key: '',  // our provider app id (leave it blank, you will fill it with the content manager)
       secret: '', // our provider secret key (leave it blank, you will fill it with the content manager)
-      callback: '/auth/patreon/callback', // the callback endpoint of our provider
+      callback: `${strapi.config.server.url}/auth/patreon/callback`, // the callback endpoint of our provider
       scope: [  // the scope that we need from our user to retrieve information
-        'users',
-        'pledges-to-me',
-        'my-campaign'
+        'users'
       ]
     },
     discord: {
