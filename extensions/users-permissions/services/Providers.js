@@ -147,7 +147,7 @@ const getProfile = async (provider, query, callback) => {
 
       patreon
         .query()
-        .get('oauth2/authorize')
+        .get('api/oauth2/api/current_user')
         .auth(access_token)
         .request((err, res, body) => {
           console.log(body)
