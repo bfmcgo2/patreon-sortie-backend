@@ -135,20 +135,19 @@ const getProfile = async (provider, query, callback) => {
                   auth: { bearer: '[0]' }
                 }
               },
-              '{endpoint}': {
+              '{path}': {
                 __path: {
                   alias: '__default'
                 }
               }
             }
           }
-        },
-        key: grant.patreon.key
+        }
       });
 
       patreon
         .query()
-        .get('oauth/authorize/?client_id='+grant.patreon.key+'&redirect_uri='+ encodeURIComponent(grant.patreon.callback)+'&scope='+encodeURIComponent(grant.patreon.scope.join(' ')+'&response_type=code&show_dialog=true'))
+        .get('oauth2/authorize')
         .auth(access_token)
         .request((err, res, body) => {
           console.log(body)
