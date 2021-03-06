@@ -13,8 +13,6 @@ module.exports = {
       // read your origin to define the clientId
     const clientId = origin && origin === 'website.com' ? 'com.website.www' : 'com.website.app'; // change this with your own value
     console.log(clientId);
-
-    const patreonSignIn = 
     // const appleSignIn = new AppleSignIn({
     
     //   clientId: clientId,
