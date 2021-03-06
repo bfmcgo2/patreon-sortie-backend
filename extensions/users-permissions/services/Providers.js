@@ -157,9 +157,9 @@ const getProfile = async (provider, query, callback) => {
           } else {
             // let bodyParsed = JSON.parse(body);
             callback(null, {
-              user_id: body.data.id,
-              username: body.data.attributes.full_name,
-              email: body.data.attributes.email,
+              user_id: bodyParsed.data.id,
+              username: bodyParsed.data.attributes.full_name,
+              email: bodyParsed.data.attributes.email,
             });
           }
         });
