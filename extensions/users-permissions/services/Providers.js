@@ -155,11 +155,11 @@ const getProfile = async (provider, query, callback) => {
           if (err) {
             callback(err);
           } else {
-            let bodyParsed = JSON.parse(body);
+            // let bodyParsed = JSON.parse(body);
             callback(null, {
-              user_id: bodyParsed.data.id,
-              username: bodyParsed.data.attributes.full_name,
-              email: bodyParsed.data.attributes.email,
+              user_id: body.data.id,
+              username: body.data.attributes.full_name,
+              email: body.data.attributes.email,
             });
           }
         });
