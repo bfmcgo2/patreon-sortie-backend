@@ -150,11 +150,10 @@ const getProfile = async (provider, query, callback) => {
         .get('api/oauth2/token')
         .auth(access_token)
         .request((err, res, body) => {
-          console.log(body)
+          console.log(body, "HERE IS THE BODY")
           if (err) {
             callback(err);
           } 
-
           patreon
           .query()
           .get('api/oauth2/api/current_user')
@@ -163,7 +162,7 @@ const getProfile = async (provider, query, callback) => {
             if (err) {
             callback(err);
             } 
-            
+
             callback(null, {
               username: body.data.attributes.full_name,
               email: body.data.attributes.email,
