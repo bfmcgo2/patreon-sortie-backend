@@ -132,7 +132,7 @@ const getProfile = async (provider, query, callback) => {
             'https://www.patreon.com': {
               __domain: {
                 auth: {
-                  auth: { bearer: '[0]' }
+                  auth: {user: "[0]", pass: "[1]"}
                 }
               },
               '{path}': {
@@ -148,17 +148,16 @@ const getProfile = async (provider, query, callback) => {
       patreon
         .query()
         .get('oauth2/token')
-        .auth(access_token)
+        .qs({access_token})
         .request((err, res, body) => {
           console.log(body)
           if (err) {
             callback(err);
-          } else {
-            // let bodyParsed = JSON.parse(body);
+          } 
             callback(null, {
-              user_id: bodyParsed.data.id,
-              username: bodyParsed.data.attributes.full_name,
-              email: bodyParsed.data.attributes.email,
+              user_id: body.data.id,
+              username: body.data.attributes.full_name,
+              email: body.data.attributes.email,
             });
           }
         });
