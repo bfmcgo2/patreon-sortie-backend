@@ -147,18 +147,28 @@ const getProfile = async (provider, query, callback) => {
 
       patreon
         .query()
-        .get('api/oauth2/api/current_user')
-        .qs({ access_token })
+        .get('api/oauth2/token')
+        .auth(access_token)
         .request((err, res, body) => {
           console.log(body)
           if (err) {
             callback(err);
-          } else {
+          } 
+
+          patreon
+          .query()
+          .get('api/oauth2/api/current_user')
+          .auth(body.access_token)
+          .request((err,res,body)=> {
+            if (err) {
+            callback(err);
+            } 
+            
             callback(null, {
               username: body.data.attributes.full_name,
               email: body.data.attributes.email,
             });
-          }
+          })
         });
       break;
     }
