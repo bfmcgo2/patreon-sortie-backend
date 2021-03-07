@@ -148,12 +148,12 @@ const getProfile = async (provider, query, callback) => {
       patreon
         .query()
         .get('oauth2/token')
-        .qs({access_token})
+        .auth(access_token)
         .request((err, res, body) => {
           console.log(body)
           if (err) {
             callback(err);
-          } 
+          } else {
             callback(null, {
               user_id: body.data.id,
               username: body.data.attributes.full_name,
