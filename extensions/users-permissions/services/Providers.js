@@ -159,8 +159,6 @@ const getProfile = async (provider, query, callback) => {
             email: body.data.attributes.email,
           });
         })
-      
-      }
       break;
     }
     case 'discord': {
