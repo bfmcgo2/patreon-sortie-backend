@@ -147,28 +147,20 @@ const getProfile = async (provider, query, callback) => {
 
       patreon
         .query()
-        .get('api/oauth2/token')
+        .get('api/oauth2/api/current_user')
         .auth(access_token)
         .request((err, res, body) => {
-          console.log(body, "HERE IS THE BODY")
           if (err) {
-            callback(err);
+          callback(err);
           } 
-          patreon
-          .query()
-          .get('api/oauth2/api/current_user')
-          .auth(body.access_token)
-          .request((err,res,body)=> {
-            if (err) {
-            callback(err);
-            } 
 
-            callback(null, {
-              username: body.data.attributes.full_name,
-              email: body.data.attributes.email,
-            });
-          })
-        });
+          callback(null, {
+            username: body.data.attributes.full_name,
+            email: body.data.attributes.email,
+          });
+        })
+      
+      }
       break;
     }
     case 'discord': {
