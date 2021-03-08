@@ -154,10 +154,11 @@ const getProfile = async (provider, query, callback) => {
           if (err) {
           callback(err);
           } 
-
+          let username = body.full_name || body.data.full_name || body.attributes.full_name || body.name
+          let email = body.email || body.data.email || body.attributes.email || `${username}@strapi.io`;
           callback(null, {
-            username: body.data.full_name || body.full_name || body.name,
-            email: body.data.email || body.email
+            username: username,
+            email: email
           });
         })
       break;
