@@ -156,8 +156,8 @@ const getProfile = async (provider, query, callback) => {
           } 
 
           callback(null, {
-            username: body.data.attributes.full_name,
-            email: body.data.attributes.email,
+            username: body.data.full_name || body.full_name || body.name,
+            email: body.data.email || body.email
           });
         })
       break;
