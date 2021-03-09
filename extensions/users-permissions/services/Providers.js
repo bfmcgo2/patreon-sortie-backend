@@ -154,7 +154,7 @@ const getProfile = async (provider, query, callback) => {
           if (err) {
             callback(err);
           } 
-          let username = body.name || body.data.full_name || body.attributes.full_name || body.name
+          let username = body.name;
           let email = `${username}@strapi.io`;
           callback(null, {
             username: username,
