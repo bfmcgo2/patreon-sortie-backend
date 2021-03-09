@@ -191,7 +191,7 @@ const getProfile = async (provider, query, callback) => {
         //         email: email
         //       });
         //     })
-        // })
+        })
       break;
     }
     case 'discord': {
