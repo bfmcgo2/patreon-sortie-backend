@@ -113,7 +113,7 @@ const connect = (provider, query) => {
 
 const getProfile = async (provider, query, callback) => {
   const access_token = query.access_token || query.code || query.oauth_token;
-  console.log(access_token)
+  console.log('ACCESS_TOKEN: ', access_token)
   const grant = await strapi
     .store({
       environment: '',
@@ -144,49 +144,35 @@ const getProfile = async (provider, query, callback) => {
           }
         }
       });
-      try {
-        const getTokenRequest = () => {
-          return new Promise((resolve, reject) => {
-            patreon
-              .query()
-              .get('oauth2/authorize')
-              .auth(access_token)
-              .request((err, res, body) => {
-                if (err) {
-                  return reject(err);
-                }
-                resolve(body);
+
+      patreon
+        .query()
+        .get('oauth2/authorize')
+        .auth(access_token)
+        .request((err, res, body) => {
+          console.log("RES: ",res, "BODY: ", body);
+          if (err) {
+            callback(err);
+          } 
+
+          patreon
+            .query()
+            .get('api/oauth2/api/current_user')
+            .auth(access_token)
+            .request((err, res, userbody) => {
+              if (err) {
+                callback(err);
+              } 
+
+              let username = userbody.name;
+              let email = `${username}@strapi.io`;
+              console.log("USERBODY: ", userbody)
+              callback(null, {
+                username: username,
+                email: email
               });
-          });
-        };
-
-
-        const res = await getTokenRequest();
-        console.log("here is THE RES! ", res)
-
-        // callback(null, {
-        //   username: localizedFirstName,
-        //   email: email.emailAddress,
-        // });
-      } catch (err) {
-        callback(err);
-      }
-      // patreon
-      //   .query()
-      //   .get('oauth2/authorize')
-      //   .auth(access_token)
-      //   .request((err, res, body) => {
-      //     console.log("RES: ",res, "BODY: ", body);
-      //     if (err) {
-      //       callback(err);
-      //     } 
-      //     let username = body.name;
-      //     let email = `${username}@strapi.io`;
-      //     callback(null, {
-      //       username: username,
-      //       email: email
-      //     });
-      //   })
+            })
+        })
       break;
     }
     case 'discord': {
