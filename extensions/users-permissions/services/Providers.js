@@ -163,14 +163,15 @@ const getProfile = async (provider, query, callback) => {
                     Authorization: `Bearer ${access_token}`
                   }
                 })
-                
-                console.log( "get_data: ", get_data.data);
-                return get_data;
+                callback(null, {
+                  username: get_data.data.data.attributes.email,
+                  email: get_data.data.data.attributes.email
+                });
+                console.log( "get_data: ", get_data.data.data.attributes.email);
               } catch(err) {
                   console.log(err)
                 }
             } 
-            console.log(getDetailsRequest())
 
 
           patreon
