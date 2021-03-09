@@ -147,13 +147,30 @@ const getProfile = async (provider, query, callback) => {
 
       patreon
         .query()
-        .get('api/oauth2/token')
+        .get('oauth2/authorize')
         .auth(access_token)
         .request((err, res, body) => {
           if (err) {
-            callback(`HERE IS BODY ${body}, and here is RES ${res}`);
+            callback(`THERE HERE BE ERROR ${err}`);
           } 
 
+          try {
+            const getDetailsRequest = async() => {
+              const get_data = fetch('https://www.patreon.com/api/oauth2/api/current_user', {
+                headers: {
+                  Authorization: `Bearer ${access_token}`
+                }
+              })
+              const data = await get_data;
+              const current_user = await data.json();
+              console.log(current_user)
+              return current_user;
+            } 
+  
+            console.log(getDetailsRequest)
+          } catch(err) {
+            console.log(err)
+          }
 
           patreon
             .query()
