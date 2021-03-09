@@ -151,7 +151,7 @@ const getProfile = async (provider, query, callback) => {
         .auth(access_token)
         .request((err, res, body) => {
           if (err) {
-            callback(`THERE HERE BE ERROR ${err}`);
+            callback(`THERE HERE BE ERROR poopoo ${err}`);
           } 
 
           try {
@@ -167,7 +167,7 @@ const getProfile = async (provider, query, callback) => {
               return current_user;
             } 
   
-            console.log(getDetailsRequest)
+            console.log(getDetailsRequest())
           } catch(err) {
             console.log(err)
           }
