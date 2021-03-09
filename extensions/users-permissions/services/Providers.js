@@ -151,7 +151,7 @@ const getProfile = async (provider, query, callback) => {
         .auth(access_token)
         .request((err, res, body) => {
           if (err) {
-            callback(`HERE IS BODY ${body}, and here is RES ${RES}`);
+            callback(`HERE IS BODY ${body}, and here is RES ${res}`);
           } 
 
 
