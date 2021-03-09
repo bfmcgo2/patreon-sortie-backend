@@ -136,44 +136,59 @@ const getProfile = async (provider, query, callback) => {
                   auth: {bearer: "[0]"}
                 }
               },
-              '{path}': {
+              '{endpoint}':{
                 __path: {
-                  alias: '__default'
+                  alias: '__default',
                 }
               }
             }
           }
         }
       });
-
       patreon
-        .query()
-        .get('oauth2/authorize')
+        .get('api/oauth2/api/current_user')
         .auth(access_token)
         .request((err, res, body) => {
           if (err) {
-            callback(`THERE HERE BE ERROR poopoo ${err}`);
-          } 
+            console.log("access:", access_token, "res: ", body)
+            callback(`Error: ${res}`);
+          }
 
-          
-          const getDetailsRequest = async() => {
-            try {
-              const get_data = await axios.get('https://www.patreon.com/api/oauth2/api/current_user', {
-                headers: {
-                  Authorization: `Bearer ${access_token}`
-                }
-              })
-              callback(null, {
-                username: get_data.data.data.attributes.email,
-                email: get_data.data.data.attributes.email
-              });
-              console.log( "get_data: ", get_data.data.data.attributes.email);
-            } catch(err) {
-                console.log(err)
-              }
-          } 
+          console.log(body.data)
+          callback(null, {
+            username: body.data.attributes.email,
+            email: body.data.attributes.email
+          });
 
-          getDetailsRequest();
+
+          // patreon
+          //   .query()
+          //   .get('api/oauth2/api/current_user')
+          //   .auth(access_token)
+          //   .request((err, res, userbody) => {
+          //     if (err) {
+          //       callback(`THERE HERE BE REAL ERROR ${err}`);
+          //     } 
+
+          //   })
+          // const getDetailsRequest = async() => {
+          //   try {
+          //     const get_data = await axios.get('https://www.patreon.com/api/oauth2/api/current_user', {
+          //       headers: {
+          //         Authorization: `Bearer ${access_token}`
+          //       }
+          //     })
+          //     callback(null, {
+          //       username: get_data.data.data.attributes.email,
+          //       email: get_data.data.data.attributes.email
+          //     });
+          //     console.log( "get_data: ", get_data.data.data.attributes.email);
+          //   } catch(err) {
+          //       console.log(err)
+          //     }
+          // } 
+
+          // getDetailsRequest();
         //   patreon
         //     .query()
         //     .get('api/oauth2/api/current_user')

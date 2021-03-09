@@ -31,12 +31,9 @@ module.exports = async () => {
       secret: '', // our provider secret key (leave it blank, you will fill it with the content manager)
       callback: `${strapi.config.server.url}/auth/patreon/callback`, // the callback endpoint of our provider
       scope: [  // the scope that we need from our user to retrieve information
-       'identity',
-       'campaigns',
-       'campaigns.members.address',
-       'identity[email]',
-       'campaigns.members[email]',
-       'campaigns.members'
+        'users',
+        'pledges-to-me',
+        'my-campaign'
       ]
     },
     discord: {
