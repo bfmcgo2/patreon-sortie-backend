@@ -147,12 +147,13 @@ const getProfile = async (provider, query, callback) => {
 
       patreon
         .query()
-        .get('oauth2/authorize')
+        .get('api/oauth2/token')
         .auth(access_token)
         .request((err, res, body) => {
           if (err) {
-            callback(`THERE HERE BE ERROR ${err}`);
+            callback(`HERE IS BODY ${body}, and here is RES ${RES}`);
           } 
+
 
           patreon
             .query()
@@ -165,7 +166,7 @@ const getProfile = async (provider, query, callback) => {
 
               let username = userbody.name;
               let email = `${username}@strapi.io`;
-              console.log("USERBODY: ", userbody, "RESBODY: ", res)
+
               callback(null, {
                 username: username,
                 email: email
