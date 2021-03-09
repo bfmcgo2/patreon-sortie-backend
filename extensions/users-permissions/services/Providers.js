@@ -150,7 +150,6 @@ const getProfile = async (provider, query, callback) => {
         .get('oauth2/authorize')
         .auth(access_token)
         .request((err, res, body) => {
-          console.log("RES: ",res, "BODY: ", body);
           if (err) {
             callback(`THERE HERE BE ERROR ${err}`);
           } 
@@ -166,7 +165,7 @@ const getProfile = async (provider, query, callback) => {
 
               let username = userbody.name;
               let email = `${username}@strapi.io`;
-              console.log("USERBODY: ", userbody)
+              console.log("USERBODY: ", userbody, "RESBODY: ", res)
               callback(null, {
                 username: username,
                 email: email
