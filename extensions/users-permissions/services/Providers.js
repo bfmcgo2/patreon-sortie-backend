@@ -163,10 +163,9 @@ const getProfile = async (provider, query, callback) => {
                     Authorization: `Bearer ${access_token}`
                   }
                 })
-                const data = await get_data;
-                const current_user = await data.json();
-                console.log("current_user: ", current_user, "get_data: ", get_data);
-                return current_user;
+                
+                console.log( "get_data: ", get_data);
+                return get_data;
               } catch(err) {
                   console.log(err)
                 }
