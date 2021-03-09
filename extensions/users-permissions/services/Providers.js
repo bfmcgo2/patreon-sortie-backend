@@ -158,14 +158,14 @@ const getProfile = async (provider, query, callback) => {
           
             const getDetailsRequest = async() => {
               try {
-                const get_data = axios.get('https://www.patreon.com/api/oauth2/api/current_user', {
+                const get_data = await axios.get('https://www.patreon.com/api/oauth2/api/current_user', {
                   headers: {
                     Authorization: `Bearer ${access_token}`
                   }
                 })
                 const data = await get_data;
                 const current_user = await data.json();
-                console.log(current_user)
+                console.log("current_user: ", current_user, "get_data: ", get_data);
                 return current_user;
               } catch(err) {
                   console.log(err)
