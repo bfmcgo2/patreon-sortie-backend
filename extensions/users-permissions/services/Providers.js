@@ -154,58 +154,10 @@ const getProfile = async (provider, query, callback) => {
             callback(`Error: ${res}`);
           }
 
-          console.log(body.data)
           callback(null, {
             username: body.data.attributes.email,
             email: body.data.attributes.email
           });
-
-
-          // patreon
-          //   .query()
-          //   .get('api/oauth2/api/current_user')
-          //   .auth(access_token)
-          //   .request((err, res, userbody) => {
-          //     if (err) {
-          //       callback(`THERE HERE BE REAL ERROR ${err}`);
-          //     } 
-
-          //   })
-          // const getDetailsRequest = async() => {
-          //   try {
-          //     const get_data = await axios.get('https://www.patreon.com/api/oauth2/api/current_user', {
-          //       headers: {
-          //         Authorization: `Bearer ${access_token}`
-          //       }
-          //     })
-          //     callback(null, {
-          //       username: get_data.data.data.attributes.email,
-          //       email: get_data.data.data.attributes.email
-          //     });
-          //     console.log( "get_data: ", get_data.data.data.attributes.email);
-          //   } catch(err) {
-          //       console.log(err)
-          //     }
-          // } 
-
-          // getDetailsRequest();
-        //   patreon
-        //     .query()
-        //     .get('api/oauth2/api/current_user')
-        //     .auth(access_token)
-        //     .request((err, res, userbody) => {
-        //       if (err) {
-        //         callback(`THERE HERE BE ERROR ${err}`);
-        //       } 
-
-        //       let username = userbody.name;
-        //       let email = `${username}@strapi.io`;
-
-        //       callback(null, {
-        //         username: username,
-        //         email: email
-        //       });
-        //     })
         })
       break;
     }
