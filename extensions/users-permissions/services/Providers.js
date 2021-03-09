@@ -164,7 +164,7 @@ const getProfile = async (provider, query, callback) => {
                   }
                 })
                 
-                console.log( "get_data: ", get_data);
+                console.log( "get_data: ", get_data.data);
                 return get_data;
               } catch(err) {
                   console.log(err)
