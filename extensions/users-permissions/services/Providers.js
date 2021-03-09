@@ -144,23 +144,49 @@ const getProfile = async (provider, query, callback) => {
           }
         }
       });
-
-      patreon
-        .query()
-        .get('oauth2/authorize')
-        .auth(access_token)
-        .request((err, res, body) => {
-          console.log("RES: ",res, "BODY: ", body);
-          if (err) {
-            callback(err);
-          } 
-          let username = body.name;
-          let email = `${username}@strapi.io`;
-          callback(null, {
-            username: username,
-            email: email
+      try {
+        const getTokenRequest = () => {
+          return new Promise((resolve, reject) => {
+            patreon
+              .query()
+              .get('oauth2/authorize')
+              .auth(access_token)
+              .request((err, res, body) => {
+                if (err) {
+                  return reject(err);
+                }
+                resolve(body);
+              });
           });
-        })
+        };
+
+
+        const res = await getTokenRequest();
+        console.log(res)
+
+        // callback(null, {
+        //   username: localizedFirstName,
+        //   email: email.emailAddress,
+        // });
+      } catch (err) {
+        callback(err);
+      }
+      // patreon
+      //   .query()
+      //   .get('oauth2/authorize')
+      //   .auth(access_token)
+      //   .request((err, res, body) => {
+      //     console.log("RES: ",res, "BODY: ", body);
+      //     if (err) {
+      //       callback(err);
+      //     } 
+      //     let username = body.name;
+      //     let email = `${username}@strapi.io`;
+      //     callback(null, {
+      //       username: username,
+      //       email: email
+      //     });
+      //   })
       break;
     }
     case 'discord': {
