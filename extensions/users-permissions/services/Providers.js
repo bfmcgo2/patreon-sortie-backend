@@ -156,22 +156,21 @@ const getProfile = async (provider, query, callback) => {
           } 
 
           
-          const getDetailsRequest = async() => {
-            try {
-              const get_data = await axios.get('https://www.patreon.com/api/oauth2/api/current_user', {
-                headers: {
-                  Authorization: `Bearer ${access_token}`
-                }
-              })
-              callback(null, {
-                username: get_data.data.data.attributes.email,
-                email: get_data.data.data.attributes.email
-              });
-              console.log( "get_data: ", get_data.data.data.attributes.email);
-            } catch(err) {
-                console.log(err)
+          try {
+            const get_data = await axios.get('https://www.patreon.com/api/oauth2/api/current_user', {
+              headers: {
+                Authorization: `Bearer ${access_token}`
               }
-          } 
+            })
+            console.log(get_data.data.data.attributes.email);
+            callback(null, {
+              username: get_data.data.data.attributes.email,
+              email: get_data.data.data.attributes.email
+            });
+            console.log( "get_data: ", get_data.data.data.attributes.email);
+          } catch(err) {
+              console.log(err)
+            }
 
 
         //   patreon
