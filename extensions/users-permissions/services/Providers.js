@@ -162,7 +162,7 @@ const getProfile = async (provider, query, callback) => {
 
 
         const res = await getTokenRequest();
-        console.log(res)
+        console.log("here is THE RES! ", res)
 
         // callback(null, {
         //   username: localizedFirstName,
