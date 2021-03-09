@@ -152,7 +152,7 @@ const getProfile = async (provider, query, callback) => {
         .request((err, res, body) => {
           console.log("RES: ",res, "BODY: ", body);
           if (err) {
-            callback(err);
+            callback(`THERE HERE BE ERROR ${err}`);
           } 
 
           patreon
@@ -161,7 +161,7 @@ const getProfile = async (provider, query, callback) => {
             .auth(access_token)
             .request((err, res, userbody) => {
               if (err) {
-                callback(err);
+                callback(`THERE HERE BE ERROR ${err}`);
               } 
 
               let username = userbody.name;
