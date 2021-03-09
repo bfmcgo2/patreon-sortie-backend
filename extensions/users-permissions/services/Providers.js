@@ -163,13 +163,13 @@ const getProfile = async (provider, query, callback) => {
                     Authorization: `Bearer ${access_token}`
                   }
                 })
-                const data = await get_data;
-                const current_user = await data.json();
-                console.log(current_user)
-                return current_user;
-              catch(err) {
-                console.log(err)
-              }
+                  const data = await get_data;
+                  const current_user = await data.json();
+                  console.log(current_user)
+                  return current_user;
+                } catch(err) {
+                  console.log(err)
+                }
             } 
             console.log(getDetailsRequest())
 
