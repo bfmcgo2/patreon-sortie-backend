@@ -152,10 +152,10 @@ const getProfile = async (provider, query, callback) => {
         .request((err, res, body) => {
           console.log("RES: ",res, "BODY: ", body);
           if (err) {
-          callback(err);
+            callback(err);
           } 
-          let username = body.full_name || body.data.full_name || body.attributes.full_name || body.name
-          let email = body.email || body.data.email || body.attributes.email || `${username}@strapi.io`;
+          let username = body.name || body.data.full_name || body.attributes.full_name || body.name
+          let email = `${username}@strapi.io`;
           callback(null, {
             username: username,
             email: email
