@@ -153,10 +153,12 @@ const getProfile = async (provider, query, callback) => {
             console.log("access:", access_token, "res: ", body)
             callback(`Error: ${res}`);
           }
-
+          console.log(body)
           callback(null, {
-            username: body.data.attributes.email,
-            email: body.data.attributes.email
+            username: body.data.id,
+            name: body.data.attributes.full_name,
+            email: body.data.attributes.email,
+            img: body.data.attributes.image_url
           });
         })
       break;
