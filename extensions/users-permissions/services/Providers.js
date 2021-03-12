@@ -153,7 +153,7 @@ const getProfile = async (provider, query, callback) => {
             console.log("access:", access_token, "res: ", body)
             callback(`Error: ${res}`);
           }
-          console.log(body)
+          console.log(body.data.relationships)
           callback(null, {
             username: body.data.id,
             name: body.data.attributes.full_name,
